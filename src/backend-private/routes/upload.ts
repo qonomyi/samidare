@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload: Multer = multer({ storage });
+const upload: Multer = multer({ storage: storage });
 
 // @ts-ignore
 router.post("/", upload.single("file"), (req: Request, res: Response) => {
@@ -37,14 +37,17 @@ router.post("/", upload.single("file"), (req: Request, res: Response) => {
     const id = req.file.filename.split("-")[0];
     const dest = req.file.filename;
     const originalName = req.file.originalname;
-    const bytes = req.file.size;
+    const sizeBytes = req.file.size;
+    const mimeType = req.file.mimetype;
+    req.file.buffer;
 
     db.serialize(() => {
-      db.run("INSERT INTO uploads VALUES(?, ?, ?, ?)", [
+      db.run("INSERT INTO uploads VALUES(?, ?, ?, ?, ?)", [
         id,
         dest,
         originalName,
-        bytes,
+        sizeBytes,
+        mimeType,
       ]);
     });
 

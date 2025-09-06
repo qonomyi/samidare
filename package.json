@@ -4,12 +4,13 @@
   "description": "",
   "main": "",
   "scripts": {
+    "clean": "rimraf dist",
     "build:private": "tsc --project src/backend-private",
     "build:public": "tsc --project src/backend-public",
     "build": "tsc --clean & pnpm run \"/^build:.*/\"",
-    "run:private": "node dist/backend-private/main.js",
-    "run:public": "node dist/backend-public/main.js",
-    "run": "pnpm run \"/^run:.*/\""
+    "start:private": "node dist/backend-private/main.js",
+    "start:public": "node dist/backend-public/main.js",
+    "start": "pnpm run \"/^start:.*/\""
   },
   "keywords": [],
   "author": "",
@@ -28,6 +29,7 @@
     "@types/multer": "^2.0.0",
     "@types/node": "^24.3.0",
     "@types/sqlite3": "^5.1.0",
+    "rimraf": "^6.0.1",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   },

@@ -4,7 +4,12 @@
   "description": "",
   "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:private": "tsc --project src/backend-private",
+    "build:public": "tsc --project src/backend-public",
+    "build": "tsc --clean & pnpm run \"/^build:.*/\"",
+    "run:private": "node dist/backend-private/main.js",
+    "run:public": "node dist/backend-public/main.js",
+    "run": "pnpm run \"/^run:.*/\""
   },
   "keywords": [],
   "author": "",

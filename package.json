@@ -7,7 +7,7 @@
     "clean": "rimraf dist",
     "build:private": "tsc --project src/backend-private",
     "build:public": "tsc --project src/backend-public",
-    "build": "tsc --clean & pnpm run \"/^build:.*/\"",
+    "build": "pnpm run \"/^build:.*/\"",
     "start:private": "node dist/backend-private/main.js",
     "start:public": "node dist/backend-public/main.js",
     "start": "pnpm run \"/^start:.*/\""

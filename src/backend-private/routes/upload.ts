@@ -5,6 +5,7 @@ import path from "path";
 import crypto from "crypto";
 import sqlite3 from "sqlite3";
 import { fileTypeFromFile } from "file-type";
+
 const router: Router = Router();
 
 const root = process.cwd();
@@ -39,14 +40,11 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
     const dest = req.file.filename;
     const originalName = req.file.originalname;
     const sizeBytes = req.file.size;
-    //const mimeType = req.file.mimetype;
+
     const fileType = await fileTypeFromFile(
       `data/uploads/${req.file.filename}`,
     );
-
     const mimeType = fileType?.mime;
-
-    console.log(mimeType);
 
     db.serialize(() => {
       db.run("INSERT INTO uploads VALUES(?, ?, ?, ?, ?)", [

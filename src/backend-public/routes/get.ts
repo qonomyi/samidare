@@ -39,11 +39,8 @@ router.get("/:id", (req: Request, res: Response) => {
       const filePath = path.join(root, "data", "uploads", file["dest"]);
 
       return res.download(filePath, file["original_name"]);
-      //return res.download(filePath, file["original_name"]);
     },
   );
-
-  //res.sendFile();
 });
 
 router.get("/api/bot/:id", (req: Request, res: Response) => {
@@ -103,8 +100,6 @@ router.get("/api/bot/:id", (req: Request, res: Response) => {
             <meta property="og:title" content="${file.original_name}" />
             <meta property="og:description" content="Size: ${filesize(file.size_bytes)}" />
             ${ogImage}
-            <!--<meta property="og:image:width" content="1200">-->
-            <!--<meta property="og:image:height" content="630">-->
             <meta property="og:image:type" content="image/png" />
             <meta name="theme-color" content="#bf4c45" />
           </head>

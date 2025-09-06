@@ -4,6 +4,9 @@
   "description": "",
   "main": "",
   "scripts": {
+    "dev:private": "tsx src/backend-private/main.ts",
+    "dev:public": "tsx src/backend-public/main.ts",
+    "dev": "pnpm run \"/^dev:.*/\"",
     "clean": "rimraf dist",
     "build:private": "tsc --project src/backend-private",
     "build:public": "tsc --project src/backend-public",
@@ -16,6 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "file-type": "^21.0.0",
     "filesize": "^11.0.2",
     "morgan": "^1.10.1",
     "multer": "^2.0.2",

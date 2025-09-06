@@ -65,14 +65,28 @@ router.get("/api/bot/:id", (req: Request, res: Response) => {
             />
       `;
 
-      if (file.mime_type.match("^(image|video).*$")) {
+      if (file.mime_type.match("^(image).*$")) {
         ogImage = `
             <meta
               property="og:image"
-              content="/${file.id}?raw"
+              content="/api/raw/${file.dest}"
             />
             <meta property="og:image:type" content="${file.mime_type}">
             <meta property="twitter:card" content="summary_large_image">
+        `;
+      }
+
+      if (file.mime_type.match("^(video).*$")) {
+        ogImage = `
+            <meta
+              property="og:video:url"
+              content="/api/raw/${file.dest}"
+            />
+            <meta
+              property="og:video:secure_url"
+              content="/api/raw/${file.dest}"
+            />
+            <meta property="og:type" content="video.other">
         `;
       }
 

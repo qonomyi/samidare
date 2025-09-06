@@ -6,6 +6,8 @@ const app = express();
 const port = 3000;
 
 app.use(morgan("combined"));
+
+app.use("/api/raw/", express.static("data/uploads"));
 app.use("/", getRouter);
 
 app.listen(port, () => {

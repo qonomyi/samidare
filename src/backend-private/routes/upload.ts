@@ -28,6 +28,7 @@ const storage = multer.diskStorage({
 const upload: Multer = multer({ storage: storage });
 
 // @ts-ignore
+// TODO: 安直にasyncをつけると良くない…らしい
 router.post("/", upload.single("file"), async (req: Request, res: Response) => {
   try {
     if (!req.file) {

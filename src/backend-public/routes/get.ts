@@ -14,7 +14,8 @@ type UploadRow = {
   id: string;
   dest: string;
   original_name: string;
-  bytes: number;
+  size_bytes: number;
+  mime_type: string;
 };
 
 router.use(morgan("combined"));
@@ -24,7 +25,7 @@ router.get("/:id", (req: Request, res: Response) => {
     req.get("user-agent")?.toLowerCase().includes("bot") &&
     req.query.raw != ""
   ) {
-    return res.redirect("bot/" + req.params.id);
+    return res.redirect("api/bot/" + req.params.id);
   }
 
   const file = db.all(
@@ -45,7 +46,7 @@ router.get("/:id", (req: Request, res: Response) => {
   //res.sendFile();
 });
 
-router.get("/bot/:id", (req: Request, res: Response) => {
+router.get("/api/bot/:id", (req: Request, res: Response) => {
   db.all(
     "SELECT * FROM uploads WHERE id = ?",
     [req.params.id],
@@ -56,6 +57,24 @@ router.get("/bot/:id", (req: Request, res: Response) => {
       }
 
       const filePath = path.join(root, "data", "uploads", file["dest"]);
+
+      let ogImage = `
+            <meta
+              property="og:image"
+              content="https://icons.veryicon.com/png/o/system/dan_system/file-60.png"
+            />
+      `;
+
+      if (file.mime_type.match("^(image|video).*$")) {
+        ogImage = `
+            <meta
+              property="og:image"
+              content="/${file.id}?raw"
+            />
+            <meta property="og:image:type" content="${file.mime_type}">
+            <meta property="twitter:card" content="summary_large_image">
+        `;
+      }
 
       const html = `
         <!doctype html>
@@ -68,11 +87,8 @@ router.get("/bot/:id", (req: Request, res: Response) => {
             <meta property="og:url" content="" />
             <meta property="og:type" content="website" />
             <meta property="og:title" content="${file.original_name}" />
-            <meta property="og:description" content="Size: ${filesize(file.bytes)}" />
-            <meta
-              property="og:image"
-              content="https://icons.veryicon.com/png/o/system/dan_system/file-60.png"
-            />
+            <meta property="og:description" content="Size: ${filesize(file.size_bytes)}" />
+            ${ogImage}
             <!--<meta property="og:image:width" content="1200">-->
             <!--<meta property="og:image:height" content="630">-->
             <meta property="og:image:type" content="image/png" />

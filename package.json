@@ -11,6 +11,7 @@
     "build:private": "tsc --project src/backend-private",
     "build:public": "tsc --project src/backend-public",
     "build": "pnpm run \"/^build:.*/\"",
+    "init": "node scripts/init.mjs",
     "start:private": "node dist/backend-private/main.js",
     "start:public": "node dist/backend-public/main.js",
     "start": "pnpm run \"/^start:.*/\""

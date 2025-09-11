@@ -1,0 +1,14 @@
+private:
+  host: "https://private.example.tld/"
+  port: 3001
+
+  logging:
+    upload: true
+
+public: 
+  host: "https://public.example.tld"
+  port: 3000
+
+logging:
+  webhookUrl: "https://discord.com/api/webhooks/0/0"
+  

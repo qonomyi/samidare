@@ -98,7 +98,7 @@ router.get("/api/bot/:id", (req: Request, res: Response) => {
           <head>
             <meta
               property="og:site_name"
-              content="[insert good name here] - private file uploader"
+              content="samidare - private file uploader"
             />
             <meta property="og:url" content="" />
             <meta property="og:type" content="website" />
@@ -106,7 +106,7 @@ router.get("/api/bot/:id", (req: Request, res: Response) => {
             <meta property="og:description" content="Size: ${filesize(file.size_bytes)}" />
             ${ogImage}
             <meta property="og:image:type" content="image/png" />
-            <meta name="theme-color" content="#bf4c45" />
+            <meta name="theme-color" content="#646687" />
           </head>
           <body>
             <a href=/raw/${req.params.id}?raw>Download</a>

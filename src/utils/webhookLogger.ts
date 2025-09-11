@@ -67,7 +67,7 @@ export function uploadLog(data: UploadLogArgs) {
       {
         title: "New Upload (｡>﹏<｡)",
         description: `${config.public.host}/${data.id}`,
-        color: 0x9496be,
+        color: 0xbf4c45,
         fields: [
           {
             name: "Size",

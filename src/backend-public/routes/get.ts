@@ -38,7 +38,12 @@ router.get("/:id", (req: Request, res: Response) => {
       }
       const filePath = path.join(root, "data", "uploads", file["dest"]);
 
-      return res.download(filePath, file["original_name"]);
+      //return res.download(filePath, file["original_name"]);
+      res.setHeader(
+        "Content-Disposition",
+        `inline; filename="${file.original_name}"`,
+      );
+      return res.sendFile(filePath);
     },
   );
 });

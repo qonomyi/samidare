@@ -11,4 +11,4 @@ public:
 
 logging:
   webhookUrl: "https://discord.com/api/webhooks/0/0"
-  
+ 

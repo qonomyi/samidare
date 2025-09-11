@@ -5,6 +5,8 @@ import path from "path";
 import crypto from "crypto";
 import sqlite3 from "sqlite3";
 import { fileTypeFromFile } from "file-type";
+import { uploadLog } from "../../utils/webhookLogger.js";
+import { getConfig } from "../../utils/config.js";
 
 const router: Router = Router();
 
@@ -36,7 +38,7 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
       return res.status(400).json({ message: "No file uploaded" });
     }
 
-    const id = req.file.filename.split("-")[0];
+    const id = req.file.filename.split("-")[0] as string;
     const dest = req.file.filename;
     const originalName = req.file.originalname;
     const sizeBytes = req.file.size;
@@ -56,7 +58,12 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
       ]);
     });
 
-    return res.status(200).json({ url: `https://example.com/${id}` }); // TODO: Hostにする
+    const config = getConfig();
+    if (config.private.logging) {
+      uploadLog({ id, dest, originalName, sizeBytes, mimeType });
+    }
+
+    return res.status(200).json({ url: `${config.public.host}/${id}` });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error" });

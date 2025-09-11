@@ -23,7 +23,19 @@ export type Config = {
 
 const root = process.cwd();
 
-export function loadConfig(): Config {
+let config: Config | undefined = undefined;
+
+export async function loadConfig() {
   const configPath = root + "/config.yml";
-  return yaml.load(fs.readFileSync(configPath, "utf-8")) as Config;
+
+  config = yaml.load(fs.readFileSync(configPath, "utf-8")) as Config;
+  //return yaml.load(fs.readFileSync(configPath, "utf-8")) as Config;
+}
+
+export function getConfig(): Config {
+  if (!config) {
+    throw new Error("Config has not been loaded. Call loadConfig() first.");
+  }
+
+  return config;
 }

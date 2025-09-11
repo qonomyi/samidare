@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/backend-private",
-    "rootDir": "."
+    "outDir": "../../dist/backend-private"
+    //"rootDir": "."
   }
 }

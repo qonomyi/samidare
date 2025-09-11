@@ -1,4 +1,7 @@
 node_modules
 dist
-data
+
 config.yml
+
+data/dbs
+data/uploads

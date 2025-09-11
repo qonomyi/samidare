@@ -62,6 +62,8 @@ type UploadLogArgs = {
 
 export function uploadLog(data: UploadLogArgs) {
   const config = getConfig();
+  const rawLink = encodeURI(`${config.public.host}/api/raw/${data.dest}`);
+
   baseLog({
     embeds: [
       {
@@ -86,7 +88,7 @@ export function uploadLog(data: UploadLogArgs) {
           },
           {
             name: "Raw Link",
-            value: `${config.public.host}/api/raw/${data.dest}`,
+            value: rawLink,
             inline: false,
           },
         ],

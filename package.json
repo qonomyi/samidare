@@ -35,7 +35,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/morgan": "^1.9.10",
     "@types/multer": "^2.0.0",
-    "@types/node": "^24.10.3",
+    "@types/node": "^25.0.1",
     "@types/sqlite3": "^5.1.0",
     "rimraf": "^6.1.2",
     "tsx": "^4.21.0",

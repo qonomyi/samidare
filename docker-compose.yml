@@ -1,0 +1,10 @@
+services:
+  samidare:
+    build: .
+    container_name: samidare
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

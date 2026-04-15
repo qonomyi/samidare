@@ -8,15 +8,9 @@ console.log("Initializing data directory...");
 const baseDataPath = "./data";
 const dataPaths = ["uploads", "dbs", "assets"];
 
-if (!fs.existsSync(baseDataPath)) {
-  fs.mkdirSync(baseDataPath);
-}
-
 dataPaths.forEach((p) => {
   const fullPath = path.join(baseDataPath, p);
-  if (!fs.existsSync(fullPath)) {
-    fs.mkdirSync(fullPath);
-  }
+  fs.mkdirSync(fullPath, { recursive: true });
 });
 
 console.log("Initializing database...");

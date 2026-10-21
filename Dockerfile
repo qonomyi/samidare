@@ -7,8 +7,8 @@ RUN corepack enable
 FROM base AS builder
 WORKDIR /app
 
-COPY pnpm-lock.yaml package.json ./
-RUN pnpm install --frozen-lockfile && pnpm approve-builds --all 
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json ./
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 RUN pnpm run build

@@ -6,6 +6,13 @@ import { getConfig, loadConfig } from "../utils/config.js";
 const app = express();
 app.enable("trust proxy");
 
+app.use((req, _res, next) => {
+  (req as any)._clientIp = req.ip;
+  next();
+});
+
+morgan.token("remote-addr", (req) => (req as any)._clientIp);
+
 app.use(morgan("combined"));
 
 app.use("/upload", uploadRouter);

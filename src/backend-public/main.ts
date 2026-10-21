@@ -8,11 +8,14 @@ app.enable("trust proxy");
 
 const root = process.cwd();
 
-app.use(morgan("combined"));
-
-app.get("/", (req, res) => {
-  res.sendFile(root + "/data/assets/public-root/index.html");
+app.use((req, _res, next) => {
+  (req as any)._clientIp = req.ip;
+  next();
 });
+
+morgan.token("remote-addr", (req) => (req as any)._clientIp);
+
+app.use(morgan("combined"));
 
 app.get("/favicon.ico", (req, res) => {
   res.sendFile(root + "/data/assets/favicon.ico");
